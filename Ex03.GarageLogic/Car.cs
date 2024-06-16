@@ -11,8 +11,10 @@ namespace Ex03.GarageLogic
         private eCarColor m_CarColor;
         private eDoorAmount m_CarDoorAmount;
 
-        public Car(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine) : base(i_LicensePlate, i_Wheels, i_Engine)
+        public Car(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine, eCarColor i_CarColor, eDoorAmount i_DoorAmount) : base(i_LicensePlate, i_Wheels, i_Engine)
         {
+            m_CarColor = i_CarColor;
+            m_CarDoorAmount = i_DoorAmount;
         }
 
         public eCarColor CarColor
