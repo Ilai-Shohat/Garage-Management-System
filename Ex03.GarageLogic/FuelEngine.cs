@@ -8,19 +8,23 @@ namespace Ex03.GarageLogic
 {
     public class FuelEngine : Engine
     {
-        private readonly eFuelType r_FuelType;
+        private eFuelType m_FuelType;
         private float m_CurrentFuelAmount;
 
         public FuelEngine(eFuelType i_FuelType, float i_EngineMaxCapacity) : base(i_EngineMaxCapacity)
         {
-            r_FuelType = i_FuelType;
+            m_FuelType = i_FuelType;
         }
 
         public eFuelType FuelType
         {
             get
             {
-                return r_FuelType;
+                return m_FuelType;
+            }
+            set
+            {
+                m_FuelType = value;
             }
         }
 
@@ -34,7 +38,7 @@ namespace Ex03.GarageLogic
 
         public void Refuel(eFuelType i_FuelType, float i_AmountOfFuelToFill)
         {
-            if(i_FuelType == r_FuelType)
+            if(i_FuelType == m_FuelType)
             {
                 if (m_CurrentFuelAmount + i_AmountOfFuelToFill <= EngineMaxCapacity)
                 {
@@ -47,14 +51,14 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException(string.Format("incorrect fuel type, engine takes {0} Fuel", r_FuelType));
+                throw new ArgumentException(string.Format("incorrect fuel type, engine takes {0} Fuel", m_FuelType));
             }
             
         }
 
         public override string ToString()
         {
-            string detailes = string.Format(base.ToString() + "\nEngine Fuel type: {0}" + "\nCurrent Fuel Amount: {1}", r_FuelType, m_CurrentFuelAmount);
+            string detailes = string.Format(base.ToString() + "\nEngine Fuel type: {0}" + "\nCurrent Fuel Amount: {1}", m_FuelType, m_CurrentFuelAmount);
 
             return detailes;
         }

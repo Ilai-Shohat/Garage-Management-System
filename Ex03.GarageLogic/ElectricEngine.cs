@@ -19,6 +19,10 @@ namespace Ex03.GarageLogic
             {
                 return m_RemainingOperationTime;
             }
+            set
+            {
+                m_RemainingOperationTime = value;
+            }
         }
 
         public void Recharge(float i_HoursToAdd)

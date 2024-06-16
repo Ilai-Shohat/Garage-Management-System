@@ -8,8 +8,8 @@ namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
     {
-        private readonly eCarColor r_CarColor;
-        private readonly eDoorAmount r_CarDoorAmount;
+        private eCarColor m_CarColor;
+        private eDoorAmount m_CarDoorAmount;
 
         public Car(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine) : base(i_LicensePlate, i_Wheels, i_Engine)
         {
@@ -19,7 +19,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_CarColor;
+                return m_CarColor;
+            }
+            set
+            {
+                m_CarColor = value;
             }
         }
 
@@ -27,7 +31,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_CarDoorAmount;
+                return m_CarDoorAmount;
+            }
+            set
+            {
+                m_CarDoorAmount = value;
             }
         }
 
