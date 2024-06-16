@@ -3,32 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Ex03.GarageLogic.Car;
 
 namespace Ex03.GarageLogic
 {
     public class Truck : Vehicle
     {
-        private float m_CargoTankVolume;
-        private bool m_IsContainsDangerousMaterials;
+        private readonly float r_CargoTankVolume;
+        private  bool m_IsContainsDangerousMaterials;
 
-        public Truck(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine) : base(i_LicensePlate, i_Wheels, i_Engine)
+        public Truck(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine,float i_CargoTankVolume,bool i_IsContainsDangerousMaterials) : base(i_LicensePlate, i_Wheels, i_Engine)
         {
+            r_CargoTankVolume = i_CargoTankVolume;
+            m_IsContainsDangerousMaterials = i_IsContainsDangerousMaterials;
         }
 
         public float CargoTankVolume
         {
-            get { return m_CargoTankVolume; }
-            set
-            {
-                if (value < 0)
-                {
-                    //TODO: exception
-                }
-                else
-                {
-                    m_CargoTankVolume = value;
-                }
-            }
+            get { return r_CargoTankVolume; }
 
         }
 
