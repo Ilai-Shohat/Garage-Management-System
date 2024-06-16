@@ -8,37 +8,35 @@ namespace Ex03.GarageLogic
 {
     public class Truck : Vehicle
     {
-        private float m_CargoVolume;
-        private bool IsContainsDangerousMaterials;
+        private float m_CargoTankVolume;
+        private bool m_IsContainsDangerousMaterials;
 
-
-        public Truck(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine ) : base(i_LicensePlate, i_Wheels, i_Engine)
+        public Truck(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine) : base(i_LicensePlate, i_Wheels, i_Engine)
         {
-            
         }
 
-        public float CargoVolume
+        public float CargoTankVolume
         {
-            get { return m_CargoVolume; }
+            get { return m_CargoTankVolume; }
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Cargo volume is invalid");
+                    //TODO: exception
                 }
                 else
                 {
-                    m_CargoVolume = value;
-
+                    m_CargoTankVolume = value;
                 }
             }
 
         }
 
-        //i think we should write class of To String
-        //i dont use the 2 fields in the constrctur because i dont understad if i get them from the user and then put in construtur or we should do a deafult veribale ???
-       
+        public override string ToString()
+        {
+            string detailes = String.Format("Truck is capable of carrying {0}\nTruck {1} containing dangerous materials", m_CargoTankVolume, m_IsContainsDangerousMaterials ? "is" : "isn't");
+
+            return detailes;
+        }
     }
-    
-    
 }
