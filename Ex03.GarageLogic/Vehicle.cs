@@ -14,11 +14,13 @@ namespace Ex03.GarageLogic
         protected readonly Wheel[] r_Wheels;
         protected readonly Engine r_Engine;
 
-        public Vehicle(string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine)
+        public Vehicle(string i_ModelName ,string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine)
         {
+            r_ModelName = i_ModelName;
             r_LicensePlate = i_LicensePlate;
             r_Wheels = i_Wheels;
             r_Engine = i_Engine;
+            //TODO: get energy percentage
         }
         public string ModelName
         {

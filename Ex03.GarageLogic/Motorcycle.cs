@@ -11,8 +11,10 @@ namespace Ex03.GarageLogic
         private eMotorcycleLicenseType m_MotorcycleLicenseType;
         private int m_EngineVolume;
 
-        public Motorcycle(string i_LicensePlate,Wheel[] i_Wheels, Engine i_Engine) : base(i_LicensePlate,i_Wheels, i_Engine)
+        public Motorcycle(string i_ModelName, string i_LicensePlate,Wheel[] i_Wheels, Engine i_Engine, eMotorcycleLicenseType i_MotorcycleLicenseType, int i_EngineVolume) : base(i_ModelName,i_LicensePlate,i_Wheels, i_Engine)
         {
+            m_MotorcycleLicenseType = i_MotorcycleLicenseType;
+            m_EngineVolume = i_EngineVolume;
         }
 
         public eMotorcycleLicenseType MotorcycleLicenseType
