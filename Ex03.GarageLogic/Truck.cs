@@ -32,6 +32,15 @@ namespace Ex03.GarageLogic
 
         }
 
+        public bool IsContainDangerousMaterials
+        {
+            get { return m_IsContainsDangerousMaterials; }
+            set
+            {
+                m_IsContainsDangerousMaterials = value;
+            }
+        }
+
         public override string ToString()
         {
             string detailes = String.Format("Truck is capable of carrying {0}\nTruck {1} containing dangerous materials", m_CargoTankVolume, m_IsContainsDangerousMaterials ? "is" : "isn't");
