@@ -35,10 +35,6 @@ namespace Ex03.GarageLogic
             {
                 return r_CarDoorAmount;
             }
-            set
-            {
-                m_CarDoorAmount = value;
-            }
         }
 
         public enum eCarColor
