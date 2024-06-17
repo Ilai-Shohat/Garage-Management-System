@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Ex03.GarageLogic.Car;
 
 namespace Ex03.GarageLogic
 {
@@ -40,9 +36,23 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string detailes = String.Format("Truck is capable of carrying {0}\nTruck {1} containing dangerous materials", r_CargoTankVolume, m_IsContainsDangerousMaterials ? "is" : "isn't");
+            string containsDangerousMaterials = m_IsContainsDangerousMaterials ? "Yes" : "No";
+            string details = string.Format(
+                "Truck\n" +
+                "Model Name: {0}\n" +
+                "License Plate: {1}\n" +
+                "Cargo Tank Volume: {2} liters\n" +
+                "Contains Dangerous Materials: {3}\n" +
+                "Wheel Details:\n{4}\n" +
+                "Engine Details:\n{5}",
+                r_ModelName,
+                r_LicensePlate,
+                r_CargoTankVolume,
+                containsDangerousMaterials,
+                string.Join("\n", r_Wheels.Select(wheel => wheel.ToString())),
+                r_Engine.ToString());
 
-            return detailes;
+            return details;
         }
     }
 }

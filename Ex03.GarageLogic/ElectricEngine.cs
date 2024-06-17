@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class ElectricEngine : Engine
     {
-        private float m_RemainingOperationTime;
+        private float m_RemainingOperationTime = 0;
         public ElectricEngine(float i_EngineMaxCapacity) : base(i_EngineMaxCapacity)
         {
         }
@@ -31,6 +25,18 @@ namespace Ex03.GarageLogic
             {
                 throw new ValueOutOfRangeException("recharging the engine", 0, EngineMaxCapacity - RemainingOperationTime);
             }
+        }
+
+        public override string ToString()
+        {
+            string details = string.Format(
+                "Electric Engine\n" +
+                "Max Battery Capacity: {0} hours\n" +
+                "Remaining Battery Time: {1} hours",
+                EngineMaxCapacity,
+                m_RemainingOperationTime);
+
+            return details;
         }
     }
 }

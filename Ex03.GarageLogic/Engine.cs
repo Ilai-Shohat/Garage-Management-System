@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -25,7 +21,11 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("Engine Max Capacity: {0}", r_EngineMaxCapacity);
+            string details = string.Format(
+                "Engine Max Capacity: {0}",
+                r_EngineMaxCapacity);
+
+            return details;
         }
     }
 }

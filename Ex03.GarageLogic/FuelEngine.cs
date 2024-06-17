@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
     public class FuelEngine : Engine
     {
         private readonly eFuelType r_FuelType;
-        private float m_CurrentFuelAmount;
+        private float m_CurrentFuelAmount = 0;
 
         public FuelEngine(eFuelType i_FuelType, float i_EngineMaxCapacity) : base(i_EngineMaxCapacity)
         {
@@ -54,9 +50,16 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string detailes = string.Format(base.ToString() + "\nEngine Fuel type: {0}" + "\nCurrent Fuel Amount: {1}", r_FuelType, m_CurrentFuelAmount);
+            string details = string.Format(
+                "Fuel Engine\n" +
+                "Fuel Type: {0}\n" +
+                "Max Fuel Capacity: {1} liters\n" +
+                "Current Fuel Amount: {2} liters",
+                r_FuelType,
+                EngineMaxCapacity,
+                m_CurrentFuelAmount);
 
-            return detailes;
+            return details;
         }
 
         public enum eFuelType

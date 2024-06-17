@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -34,23 +31,12 @@ namespace Ex03.GarageLogic
             return r_VehiclesInGarage[i_LicensePlate];
         }
 
-        public void AddVehicle(eVehicleType i_VehicleType)
+        public void AddVehicleToGarage(VehicleRecord i_VehicleRecord, eVehicleType i_VehicleType, string i_ModelName, string i_LicensePlate, object[] i_VehicleSpecificData)
         {
-            switch(i_VehicleType)
-            {
-                case eVehicleType.FuelCar:
-                    break;
-                case eVehicleType.ElectricCar:
-                    break;
-                case eVehicleType.FuelMotorcycle:
-                    break;
-                case eVehicleType.ElectricMotorcycle:
-                    break;
-                case eVehicleType.FuelTruck:
-                    break;
+            Vehicle vehicleToBeAdded = VehicleGenerator.CreateVehicle(i_VehicleType, i_ModelName, i_LicensePlate, i_VehicleSpecificData);
+            VehicleEntry vehicleEntry = new VehicleEntry(vehicleToBeAdded, i_VehicleRecord);
 
-            }
-
+            r_VehiclesInGarage[i_LicensePlate] = vehicleEntry;
         }
 
         public Dictionary<string, VehicleEntry> GetVehiclesByStatus(VehicleRecord.eVehicleStatus i_VehicleStatus)

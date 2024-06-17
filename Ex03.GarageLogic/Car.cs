@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Ex03.GarageLogic
 {
@@ -15,7 +11,6 @@ namespace Ex03.GarageLogic
         {
             m_CarColor = i_CarColor;
             r_CarDoorAmount = i_DoorAmount;
-            
         }
 
         public eCarColor CarColor
@@ -44,6 +39,28 @@ namespace Ex03.GarageLogic
             {
                 return Engine is FuelEngine ? eVehicleType.FuelCar : eVehicleType.ElectricCar;
             }
+        }
+
+        public override string ToString()
+        {
+            string carType = CarType == eVehicleType.FuelCar ? "Fuel" : "Electric";
+            string details = string.Format(
+                "Car Type: {0}\n" +
+                "Model Name: {1}\n" +
+                "License Plate: {2}\n" +
+                "Color: {3}\n" +
+                "Number of Doors: {4}\n" +
+                "Wheel Details:\n{5}\n" +
+                "Engine Details:\n{6}",
+                carType,
+                r_ModelName,
+                r_LicensePlate,
+                m_CarColor,
+                r_CarDoorAmount,
+                string.Join("\n", r_Wheels.Select(wheel => wheel.ToString())),
+                r_Engine.ToString());
+
+            return details;
         }
 
         public enum eCarColor

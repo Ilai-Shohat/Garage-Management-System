@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
         public static Vehicle CreateVehicle(eVehicleType i_VehicleType, string i_ModelName, string i_LicensePlate, object[] i_VehicleSpecificData)
         {
             Vehicle newVehicle;
-            Engine engine = GenerateEngine(i_VehicleType);
+            Engine engine = GenerateEngine(i_VehicleType, i_VehicleSpecificData);
             Wheel[] wheels = GenerateWheels(i_VehicleType);
 
             switch (i_VehicleType)
@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
             return newVehicle;
         }
 
-        private static Engine GenerateEngine(eVehicleType i_VehicleType)
+        private static Engine GenerateEngine(eVehicleType i_VehicleType, object[] i_VehicleSpecificData)
         {
             Engine newEngine;
             if(i_VehicleType == eVehicleType.ElectricMotorcycle || i_VehicleType == eVehicleType.ElectricCar)

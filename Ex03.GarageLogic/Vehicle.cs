@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -60,6 +56,29 @@ namespace Ex03.GarageLogic
             {
                 wheel.InflateToMax();
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat(
+                "Vehicle\n" +
+                "Model Name: {0}\n" +
+                "License Plate: {1}\n" +
+                "Energy Percentage: {2}%\n" +
+                "Wheel Details:\n",
+                r_ModelName,
+                r_LicensePlate,
+                m_EnergyPercentage);
+
+            foreach (Wheel wheel in r_Wheels)
+            {
+                sb.AppendLine(wheel.ToString());
+            }
+
+            sb.AppendFormat("Engine Details:\n{0}", r_Engine);
+
+            return sb.ToString();
         }
     }
 }

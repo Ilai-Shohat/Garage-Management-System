@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class VehicleRecord
     {
@@ -46,6 +40,21 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override string ToString()
+        {
+
+            string details = string.Format(
+                "Vehicle Record\n" +
+                "Owner Name: {0}\n" +
+                "Phone Number: {1}\n" +
+                "Vehicle Status: {2}",
+                r_OwnerName,
+                r_PhoneNumber,
+                m_VehicleStatus);
+
+            return details;
+        }
+
         public enum eVehicleStatus
         {
             InRepair = 1,
@@ -53,7 +62,4 @@ namespace Ex03.GarageLogic
             PaidFor = 3,
         }
     }
-   
-
-
 }

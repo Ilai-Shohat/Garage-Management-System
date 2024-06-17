@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class Wheel
     {
         private readonly string r_ManufactorName;
-        private float m_CurrentAirPressure;
+        private float m_CurrentAirPressure = 0;
         private readonly float r_MaxAirPressureRecommended;
 
         public Wheel(float i_MaxAirPressureRecommended)
@@ -55,6 +49,20 @@ namespace Ex03.GarageLogic
         public void InflateToMax()
         {
             Inflate(r_MaxAirPressureRecommended - m_CurrentAirPressure);
+        }
+
+        public override string ToString()
+        {
+            string details = string.Format(
+                "Wheel\n" +
+                "Manufacturer Name: {0}\n" +
+                "Current Air Pressure: {1} PSI\n" +
+                "Max Air Pressure Recommended: {2} PSI",
+                r_ManufactorName,
+                m_CurrentAirPressure,
+                r_MaxAirPressureRecommended);
+
+            return details;
         }
     }
 }
