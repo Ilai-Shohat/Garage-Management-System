@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class GarageManager
+    public enum eVehicleType
     {
-        protected readonly Dictionary<string, VehicleEntry> r_VehiclesInGarage;
+        FuelCar,
+        ElectricCar,
+        FuelMotorcycle,
+        ElectricMotorcycle,
+        FuelTruck
     }
 }

@@ -15,6 +15,7 @@ namespace Ex03.GarageLogic
         {
             m_CarColor = i_CarColor;
             r_CarDoorAmount = i_DoorAmount;
+            
         }
 
         public eCarColor CarColor
@@ -37,12 +38,20 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public eVehicleType CarType
+        {
+            get
+            {
+                return Engine is FuelEngine ? eVehicleType.FuelCar : eVehicleType.ElectricCar;
+            }
+        }
+
         public enum eCarColor
         {
-            Yellow,
-            White,
-            Red,
-            Grey
+            Yellow = 1,
+            White = 2,
+            Red = 3,
+            Grey = 4
         }
 
         public enum eDoorAmount

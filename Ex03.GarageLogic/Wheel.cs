@@ -8,9 +8,9 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private string m_ManufactorName;
+        private readonly string r_ManufactorName;
         private float m_CurrentAirPressure;
-        private float r_MaxAirPressureRecommended;
+        private readonly float r_MaxAirPressureRecommended;
 
         public Wheel(float i_MaxAirPressureRecommended)
         {
@@ -19,46 +19,36 @@ namespace Ex03.GarageLogic
         }
         public string ManufacturerName
         {
-            get { return m_ManufactorName; }
-            set { m_ManufactorName = value; } //to do exception
-
+            get 
+            { 
+                return r_ManufactorName; 
+            }
         }
 
         public float CurrentAirPressure
         {
-            get { return m_CurrentAirPressure; }
-            set
-            {
-                if (value >= 0 && value < r_MaxAirPressureRecommended)
-                {
-                    m_CurrentAirPressure = value;
-                }
-                else
-                {
-                    //to do exception of Valuseout...
-                }
+            get 
+            { 
+                return m_CurrentAirPressure; 
             }
         }
 
         public float MaxAirPressureRecommended
         {
-            get { return r_MaxAirPressureRecommended; }
-
-
-
-
+            get 
+            {
+                return r_MaxAirPressureRecommended;
+            }
         }
          public void Inflate(float i_PSIToAdd)
         {
-            if (i_PSIToAdd +  m_CurrentAirPressure <= r_MaxAirPressureRecommended)
+            if (i_PSIToAdd > 0 && i_PSIToAdd +  m_CurrentAirPressure <= r_MaxAirPressureRecommended)
             {
                 m_CurrentAirPressure = r_MaxAirPressureRecommended;
             }
             else
             {
-                // to do exception
-
-
+                throw new ValueOutOfRangeException("inflating the wheel", 0, MaxAirPressureRecommended - CurrentAirPressure);
             }
         }
     }

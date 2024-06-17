@@ -10,7 +10,8 @@ namespace Ex03.GarageLogic
     public class Truck : Vehicle
     {
         private readonly float r_CargoTankVolume;
-        private  bool m_IsContainsDangerousMaterials;
+        private bool m_IsContainsDangerousMaterials;
+
 
         public Truck(string i_ModelName, string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine,float i_CargoTankVolume,bool i_IsContainsDangerousMaterials) : base(i_ModelName, i_LicensePlate, i_Wheels, i_Engine)
         {
@@ -20,13 +21,18 @@ namespace Ex03.GarageLogic
 
         public float CargoTankVolume
         {
-            get { return r_CargoTankVolume; }
-
+            get 
+            { 
+                return r_CargoTankVolume; 
+            }
         }
 
         public bool IsContainDangerousMaterials
         {
-            get { return m_IsContainsDangerousMaterials; }
+            get 
+            { 
+                return m_IsContainsDangerousMaterials; 
+            }
             set
             {
                 m_IsContainsDangerousMaterials = value;

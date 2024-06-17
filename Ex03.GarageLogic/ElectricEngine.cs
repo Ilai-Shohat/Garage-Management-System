@@ -19,23 +19,18 @@ namespace Ex03.GarageLogic
             {
                 return m_RemainingOperationTime;
             }
-            set
-            {
-                m_RemainingOperationTime = value;
-            }
         }
 
         public void Recharge(float i_HoursToAdd)
         {
-            if(i_HoursToAdd + RemainingOperationTime <= EngineMaxCapacity)
+            if(i_HoursToAdd > 0 && i_HoursToAdd + RemainingOperationTime <= EngineMaxCapacity)
             {
                 m_RemainingOperationTime += i_HoursToAdd;
             }
             else
             {
-                //TODO: outOfValue Exception
+                throw new ValueOutOfRangeException("recharging the engine", 0, EngineMaxCapacity - RemainingOperationTime);
             }
         }
-
     }
 }

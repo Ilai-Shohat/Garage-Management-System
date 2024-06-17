@@ -9,11 +9,10 @@ namespace Ex03.GarageLogic
     public class VehicleRecord
     {
         private readonly string r_OwnerName;
-        private  readonly string r_PhoneNumber;
+        private readonly string r_PhoneNumber;
         private eVehicleStatus m_VehicleStatus = eVehicleStatus.InRepair;
-        
 
-        public VehicleRecord(string i_Name , string i_Phone ) 
+        public VehicleRecord(string i_Name , string i_Phone) 
         {
             r_OwnerName = i_Name;
             r_PhoneNumber = i_Phone;
@@ -47,12 +46,11 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         public enum eVehicleStatus
         {
-            InRepair,
-            Repatired,
-            PaidFor,
+            InRepair = 1,
+            Repaired = 2,
+            PaidFor = 3,
         }
     }
    
