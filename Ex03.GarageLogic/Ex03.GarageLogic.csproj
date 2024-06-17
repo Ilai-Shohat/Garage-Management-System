@@ -52,6 +52,7 @@
     <Compile Include="VehicleEntry.cs" />
     <Compile Include="VehicleGenerator.cs" />
     <Compile Include="VehicleRecord.cs" />
+    <Compile Include="VehiclesProperties.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

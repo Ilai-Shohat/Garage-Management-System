@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic
                 return r_MaxAirPressureRecommended;
             }
         }
-         public void Inflate(float i_PSIToAdd)
+        public void Inflate(float i_PSIToAdd)
         {
             if (i_PSIToAdd > 0 && i_PSIToAdd +  m_CurrentAirPressure <= r_MaxAirPressureRecommended)
             {
@@ -50,6 +50,11 @@ namespace Ex03.GarageLogic
             {
                 throw new ValueOutOfRangeException("inflating the wheel", 0, MaxAirPressureRecommended - CurrentAirPressure);
             }
+        }
+
+        public void InflateToMax()
+        {
+            Inflate(r_MaxAirPressureRecommended - m_CurrentAirPressure);
         }
     }
 }

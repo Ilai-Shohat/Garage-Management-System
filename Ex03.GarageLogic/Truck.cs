@@ -12,7 +12,6 @@ namespace Ex03.GarageLogic
         private readonly float r_CargoTankVolume;
         private bool m_IsContainsDangerousMaterials;
 
-
         public Truck(string i_ModelName, string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine,float i_CargoTankVolume,bool i_IsContainsDangerousMaterials) : base(i_ModelName, i_LicensePlate, i_Wheels, i_Engine)
         {
             r_CargoTankVolume = i_CargoTankVolume;

@@ -53,5 +53,13 @@ namespace Ex03.GarageLogic
                 return r_Engine;
             }
         }
+
+        public void InflateWheelsToMax()
+        {
+            foreach (Wheel wheel in r_Wheels)
+            {
+                wheel.InflateToMax();
+            }
+        }
     }
 }
