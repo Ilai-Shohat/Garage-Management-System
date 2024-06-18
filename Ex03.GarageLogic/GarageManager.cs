@@ -103,9 +103,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void DisplayVehicleInformation(string i_LicensePlate)
+        public string GetVehicleInformation(string i_LicensePlate)
         {
-            Console.WriteLine(r_VehiclesInGarage[i_LicensePlate].ToString());
+            return r_VehiclesInGarage[i_LicensePlate].ToString();
         }
     }
 }
