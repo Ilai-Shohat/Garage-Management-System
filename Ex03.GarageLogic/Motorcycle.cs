@@ -1,24 +1,42 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System;
+using System.Linq;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicle
     {
-        private readonly eMotorcycleLicenseType r_MotorcycleLicenseType;
-        private readonly int r_EngineVolume;
+        private eMotorcycleLicenseType m_MotorcycleLicenseType;
+        private int m_EngineVolume;
         private readonly eVehicleType r_MotorCycleType;
 
-        public Motorcycle(string i_ModelName, string i_LicensePlate,Wheel[] i_Wheels, Engine i_Engine, eMotorcycleLicenseType i_MotorcycleLicenseType, int i_EngineVolume) : base(i_ModelName,i_LicensePlate,i_Wheels, i_Engine)
+        public Motorcycle(string i_ModelName, string i_LicensePlate,Wheel[] i_Wheels, Engine i_Engine) : base(i_ModelName,i_LicensePlate,i_Wheels, i_Engine)
         {
-            r_MotorcycleLicenseType = i_MotorcycleLicenseType;
-            r_EngineVolume = i_EngineVolume;
         }
 
         public eMotorcycleLicenseType MotorcycleLicenseType
         {
             get
             {
-                return r_MotorcycleLicenseType;
+                return m_MotorcycleLicenseType;
+            }
+        }
+
+        private void setMotorcycleLicenseType(string i_MotorcycleLicenseType)
+        {
+            if (!int.TryParse(i_MotorcycleLicenseType, out _))
+            {
+                throw new FormatException("Invalid type for motorcycle license type selected");
+            }
+            else
+            {
+                if (!Enum.TryParse<eMotorcycleLicenseType>(i_MotorcycleLicenseType, out eMotorcycleLicenseType motorcycleLicenseTypeEnum))
+                {
+                    throw new ArgumentException("Undefined option for motorcycle license type");
+                }
+
+                m_MotorcycleLicenseType = motorcycleLicenseTypeEnum;
             }
         }
 
@@ -26,8 +44,23 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_EngineVolume;
+                return m_EngineVolume;
             }
+        }
+
+        private void setEngineVolume(string i_EngineVolume)
+        {
+            if (!int.TryParse(i_EngineVolume, out int engineVolume))
+            {
+                throw new FormatException("Invalid type for engine volume");
+            }
+
+            if (engineVolume <= 0)
+            {
+                throw new ArgumentException("Engine volume cannot be non-positive");
+            }
+
+            m_EngineVolume = engineVolume;
         }
 
         public eVehicleType MotorcycleType
@@ -38,26 +71,32 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override string ToString()
+        public override Dictionary<string, string[]> GetProperties()
         {
-            string motorcycleType = MotorcycleType == eVehicleType.FuelMotorcycle ? "Fuel" : "Electric";
-            string details = string.Format(
-                "Motorcycle Type: {0}\n" +
-                "Model Name: {1}\n" +
-                "License Plate: {2}\n" +
-                "License Type: {3}\n" +
-                "Engine Volume: {4}cc\n" +
-                "Wheel Details:\n{5}\n" +
-                "Engine Details:\n{6}",
-                motorcycleType,
-                r_ModelName,
-                r_LicensePlate,
-                r_MotorcycleLicenseType,
-                r_EngineVolume,
-                string.Join("\n", r_Wheels.Select(wheel => wheel.ToString())),
-                r_Engine.ToString());
+            Dictionary<string, string[]> carProperties = new Dictionary<string, string[]>
+            {
+                { "motorcycle license type", Enum.GetNames(typeof(eMotorcycleLicenseType)).ToArray() },
+                { "engine volume", null },
+                {base.Engine is FuelEngine ? "Current Fuel Amount" : "battery remaining Operation Time", null}
+            };
 
-            return details;
+            return carProperties;
+        }
+
+        public override void SetProperties(Dictionary<string, string> i_Properties)
+        {
+            string motorcycleLicenseType = i_Properties["motorcycle license type"];
+            string engineVolume = i_Properties["engine volume"];
+
+            base.Engine.SetProperties(i_Properties);
+            setMotorcycleLicenseType(motorcycleLicenseType);
+            setEngineVolume(engineVolume);
+        }
+
+        protected override void AppendUniqueProperties(StringBuilder generalProperties)
+        {
+            generalProperties.AppendFormat("License Type: {0}\n", m_MotorcycleLicenseType);
+            generalProperties.AppendFormat("Engine Volume: {0}cc\n", m_EngineVolume);
         }
 
         public enum eMotorcycleLicenseType

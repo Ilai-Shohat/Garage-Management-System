@@ -13,18 +13,23 @@
 
         public Vehicle Vehicle
         {
-            get { return r_Vehicle; }
+            get 
+            {
+                return r_Vehicle; 
+            }
         }
 
         public VehicleRecord VehicleRecord
         {
-            get { return r_VehicleRecord; }
+            get 
+            {
+                return r_VehicleRecord; 
+            }
         }
 
         public override string ToString()
         {
-            
-            return r_Vehicle.ToString() + r_VehicleRecord.ToString();
+            return r_Vehicle.ToString() + "\n"+ r_VehicleRecord.ToString();
         }
     }
 }

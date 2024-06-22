@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    public class Engine
+    public abstract class Engine
     {
-        private readonly float r_EngineMaxCapacity;
+        protected readonly float r_EngineMaxCapacity;
 
         public Engine(float i_EngineMaxCapacity)
         {
@@ -19,13 +19,17 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public abstract float GetRemainingEnergyPercentage();
+
+        public abstract void SetProperties(Dictionary<string, string> i_Properties);
+
         public override string ToString()
         {
-            string details = string.Format(
+            string engineDetails = string.Format(
                 "Engine Max Capacity: {0}",
                 r_EngineMaxCapacity);
 
-            return details;
+            return engineDetails;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+using System.Collections.Generic;
+
+namespace Ex03.GarageLogic
 {
     public class ElectricEngine : Engine
     {
@@ -15,16 +18,32 @@
             }
         }
 
-        public void Recharge(float i_HoursToAdd)
+        public override float GetRemainingEnergyPercentage()
         {
-            if(i_HoursToAdd > 0 && i_HoursToAdd + RemainingOperationTime <= EngineMaxCapacity)
+            return (m_RemainingOperationTime / EngineMaxCapacity) * 100;
+        }
+
+        public void Recharge(string i_HoursToAdd)
+        {
+            if(!float.TryParse(i_HoursToAdd, out float hoursToAdd))
             {
-                m_RemainingOperationTime += i_HoursToAdd;
+                throw new FormatException("Please provide a valid number of hours to recharge the engine");
+            }
+            else if(hoursToAdd > 0 && hoursToAdd + RemainingOperationTime <= EngineMaxCapacity)
+            {
+                m_RemainingOperationTime += hoursToAdd;
             }
             else
             {
                 throw new ValueOutOfRangeException("recharging the engine", 0, EngineMaxCapacity - RemainingOperationTime);
             }
+        }
+
+        public override void SetProperties(Dictionary<string, string> i_Properties)
+        {
+            string remainingOperationTime = i_Properties["battery remaining Operation Time"];
+
+            Recharge(remainingOperationTime);
         }
 
         public override string ToString()

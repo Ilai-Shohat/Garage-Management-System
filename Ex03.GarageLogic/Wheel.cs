@@ -1,21 +1,30 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private readonly string r_ManufactorName;
+        private readonly string r_ManufacturerName;
         private float m_CurrentAirPressure = 0;
         private readonly float r_MaxAirPressureRecommended;
 
-        public Wheel(float i_MaxAirPressureRecommended)
+        public Wheel(string i_ManufacturerName, string i_CurrentAirPressure, float i_MaxAirPressureRecommended)
         {
-            r_MaxAirPressureRecommended = i_MaxAirPressureRecommended;
+            if (string.IsNullOrEmpty(i_ManufacturerName))
+            {
+                throw new ArgumentException("Empty manufacturer name");
+            }
 
+            r_ManufacturerName = i_ManufacturerName;
+            r_MaxAirPressureRecommended = i_MaxAirPressureRecommended;
+            Inflate(i_CurrentAirPressure);
         }
+
         public string ManufacturerName
         {
             get 
             { 
-                return r_ManufactorName; 
+                return r_ManufacturerName; 
             }
         }
 
@@ -34,11 +43,15 @@
                 return r_MaxAirPressureRecommended;
             }
         }
-        public void Inflate(float i_PSIToAdd)
+        public void Inflate(string i_PSIToAdd)
         {
-            if (i_PSIToAdd > 0 && i_PSIToAdd +  m_CurrentAirPressure <= r_MaxAirPressureRecommended)
+            if(!float.TryParse(i_PSIToAdd, out float PSIToAdd))
             {
-                m_CurrentAirPressure = r_MaxAirPressureRecommended;
+                throw new FormatException("Invalid type for PSI to add");
+            }
+            else if (PSIToAdd > 0 && PSIToAdd +  m_CurrentAirPressure <= r_MaxAirPressureRecommended)
+            {
+                m_CurrentAirPressure += PSIToAdd;
             }
             else
             {
@@ -48,21 +61,20 @@
 
         public void InflateToMax()
         {
-            Inflate(r_MaxAirPressureRecommended - m_CurrentAirPressure);
+            Inflate((r_MaxAirPressureRecommended - m_CurrentAirPressure).ToString());
         }
 
         public override string ToString()
         {
-            string details = string.Format(
-                "Wheel\n" +
-                "Manufacturer Name: {0}\n" +
-                "Current Air Pressure: {1} PSI\n" +
-                "Max Air Pressure Recommended: {2} PSI",
-                r_ManufactorName,
+            string wheelDetails = string.Format(
+                "    Manufacturer Name: {0}\n" +
+                "    Current Air Pressure: {1} PSI\n" +
+                "    Max Air Pressure Recommended: {2} PSI",
+                r_ManufacturerName,
                 m_CurrentAirPressure,
                 r_MaxAirPressureRecommended);
 
-            return details;
+            return wheelDetails;
         }
     }
 }

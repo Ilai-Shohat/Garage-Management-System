@@ -1,16 +1,17 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
     {
         private eCarColor m_CarColor;
-        private readonly eDoorAmount r_CarDoorAmount;
+        private eDoorAmount m_CarDoorAmount;
 
-        public Car(string i_ModelName, string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine, eCarColor i_CarColor, eDoorAmount i_DoorAmount) : base(i_ModelName, i_LicensePlate, i_Wheels, i_Engine)
+        public Car(string i_ModelName, string i_LicensePlate, Wheel[] i_Wheels, Engine i_Engine) : base(i_ModelName, i_LicensePlate, i_Wheels, i_Engine)
         {
-            m_CarColor = i_CarColor;
-            r_CarDoorAmount = i_DoorAmount;
         }
 
         public eCarColor CarColor
@@ -19,18 +20,52 @@ namespace Ex03.GarageLogic
             {
                 return m_CarColor;
             }
-            set
+        }
+
+        private void setCarColor(string i_CarColorString)
+        {
+            eCarColor carColorEnum;
+
+            if (!int.TryParse(i_CarColorString, out _))
             {
-                m_CarColor = value;
+                throw new FormatException("Invalid type for car color");
             }
+            else
+            {
+                if (!Enum.TryParse<eCarColor>(i_CarColorString, out carColorEnum))
+                {
+                    throw new ArgumentException("Undefined option for car color");
+                }
+            }
+
+            m_CarColor = carColorEnum;
         }
 
         public eDoorAmount DoorAmount
         {
             get
             {
-                return r_CarDoorAmount;
+                return m_CarDoorAmount;
             }
+        }
+
+        private void setNumberOfDoors(string i_CarDoorsString)
+        {
+            eDoorAmount carDoorsEnum;
+
+            if (!int.TryParse(i_CarDoorsString, out _))
+            {
+                throw new FormatException("Invalid option for car doors");
+            }
+            else
+            {
+                if (!Enum.TryParse<eDoorAmount>(i_CarDoorsString, out carDoorsEnum))
+                {
+                    throw new ArgumentException("Undefined option for car doors");
+                }
+            }
+
+            m_CarDoorAmount = carDoorsEnum;
         }
 
         public eVehicleType CarType
@@ -41,26 +76,32 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override string ToString()
+        public override Dictionary<string, string[]> GetProperties()
         {
-            string carType = CarType == eVehicleType.FuelCar ? "Fuel" : "Electric";
-            string details = string.Format(
-                "Car Type: {0}\n" +
-                "Model Name: {1}\n" +
-                "License Plate: {2}\n" +
-                "Color: {3}\n" +
-                "Number of Doors: {4}\n" +
-                "Wheel Details:\n{5}\n" +
-                "Engine Details:\n{6}",
-                carType,
-                r_ModelName,
-                r_LicensePlate,
-                m_CarColor,
-                r_CarDoorAmount,
-                string.Join("\n", r_Wheels.Select(wheel => wheel.ToString())),
-                r_Engine.ToString());
+            Dictionary<string, string[]> carProperties = new Dictionary<string, string[]>
+            {
+                {"car's color", Enum.GetNames(typeof(eCarColor)).ToArray()},
+                {"car door amount", Enum.GetNames(typeof(eDoorAmount)).ToArray()},
+                {base.Engine is FuelEngine ? "Current Fuel Amount" : "Remaining Operation Time", null}
+            };
 
-            return details;
+            return carProperties;
+        }
+
+        public override void SetProperties(Dictionary<string, string> i_Properties)
+        {
+            string carColorString = i_Properties["car's color"];
+            string carDoorAmount = i_Properties["car door amount"];
+
+            base.Engine.SetProperties(i_Properties);
+            setCarColor(carColorString);
+            setNumberOfDoors(carDoorAmount);
+        }
+
+        protected override void AppendUniqueProperties(StringBuilder generalProperties)
+        {
+            generalProperties.AppendFormat("Color: {0}\n", m_CarColor);
+            generalProperties.AppendFormat("Number of Doors: {0}\n", m_CarDoorAmount);
         }
 
         public enum eCarColor
@@ -73,10 +114,10 @@ namespace Ex03.GarageLogic
 
         public enum eDoorAmount
         {
-            TwoDoors = 2,
-            ThreeDoors = 3,
-            FourDoors = 4,
-            FiveDoors = 5
+            TwoDoors = 1,
+            ThreeDoors = 2,
+            FourDoors = 3,
+            FiveDoors = 4
         }
     }
 }

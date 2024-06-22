@@ -1,9 +1,6 @@
 ﻿using Ex03.GarageLogic;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.ConsoleUI
 {
@@ -27,7 +24,6 @@ namespace Ex03.ConsoleUI
 
             while (true)
             {
-
                 Console.WriteLine(i_RequestToDisplay);
                 userInput = Console.ReadLine();
                 if (userInput == null || userInput.Length == 0)
@@ -58,6 +54,17 @@ namespace Ex03.ConsoleUI
             }
         }
 
+        public static void RenderPropertiesMenu(string i_PropertyDescription, string[] i_PropertiesOptions)
+        {
+            string propertiesMenuDescription = string.Format("Please enter the {0}:", i_PropertyDescription);
+
+            Console.WriteLine(propertiesMenuDescription);
+            for (int i = 0; i < i_PropertiesOptions.Length; i++)
+            {
+                Console.WriteLine($"  {i + 1} - {i_PropertiesOptions[i]}");
+            }
+        }
+
         public static void RenderVehiclesLicensePlateByStatus(Dictionary<string, VehicleEntry> i_Vehicles, string i_Status)
         {
             int lineCounter = 1;
@@ -75,6 +82,7 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine($"{lineCounter}. Model name : {i_Vehicles[vehicleLicensePlate].Vehicle.ModelName} , license plate : |{vehicleLicensePlate}|");
                     lineCounter++;
                 }
+
                 RenderMessageAndWaitForUserEnterAnyKey("Press 'Enter' to navigate back to the main menu");
             }
         }

@@ -9,7 +9,6 @@ namespace Ex03.GarageLogic
 
         public GarageManager()
         {
-            
             r_VehiclesInGarage = new Dictionary<string, VehicleEntry>();
         }
 
@@ -31,9 +30,15 @@ namespace Ex03.GarageLogic
             return r_VehiclesInGarage[i_LicensePlate];
         }
 
-        public void AddVehicleToGarage(VehicleRecord i_VehicleRecord, eVehicleType i_VehicleType, string i_ModelName, string i_LicensePlate, object[] i_VehicleSpecificData)
+        public void AddVehicleToGarage(
+            VehicleRecord i_VehicleRecord, 
+            eVehicleType i_VehicleType,
+            string i_ModelName,
+            string i_LicensePlate,
+            string i_WheelManufacturer,
+            string i_CurrentAirPressure)
         {
-            Vehicle vehicleToBeAdded = VehicleGenerator.CreateVehicle(i_VehicleType, i_ModelName, i_LicensePlate, i_VehicleSpecificData);
+            Vehicle vehicleToBeAdded = VehicleGenerator.CreateVehicle(i_VehicleType, i_ModelName, i_LicensePlate, i_WheelManufacturer, i_CurrentAirPressure);
             VehicleEntry vehicleEntry = new VehicleEntry(vehicleToBeAdded, i_VehicleRecord);
 
             r_VehiclesInGarage[i_LicensePlate] = vehicleEntry;
@@ -68,14 +73,7 @@ namespace Ex03.GarageLogic
         {
             if (r_VehiclesInGarage[i_LicensePlate].Vehicle.Engine is FuelEngine engineToRefuel)
             {
-                if (float.TryParse(i_LitersToFillString, out float litersToFill))
-                {
-                    engineToRefuel.Refuel(i_FuelType, litersToFill);
-                }
-                else
-                {
-                    throw new FormatException("Fuel parameter is invalid");
-                }
+                engineToRefuel.Refuel(i_FuelType, i_LitersToFillString);
             }
             else
             {
@@ -88,14 +86,7 @@ namespace Ex03.GarageLogic
 
             if (r_VehiclesInGarage[i_LicensePlate].Vehicle.Engine is ElectricEngine engineToRecharge)
             {
-                if (float.TryParse(i_TimeToChargeString, out float timeToCharge))
-                {
-                    engineToRecharge.Recharge(timeToCharge);
-                }
-                else
-                {
-                    throw new FormatException("Charging parameter is invalid");
-                }
+                engineToRecharge.Recharge(i_TimeToChargeString);
             }
             else
             {

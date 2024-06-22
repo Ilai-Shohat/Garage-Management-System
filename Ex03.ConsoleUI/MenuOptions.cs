@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ex03.GarageLogic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.ConsoleUI
 {
     internal static class MenuOptions
     {
         private static readonly string[] sr_MainMenuOptions = new string[8] { "Add new Vehicle", "Show all Vehicles filtered by status", "Change Vehicle status", "Inflate Vehicle wheels to maximum", "Fuel Vehicle's engine", "Charge Vehicle's battery", "Show Vehicle properties", "Exit application" };
-        private static readonly string[] sr_FuelMenuOptions = new string[4] { "Soler", "Octan95", "Octan96", "Octan98" };
-        private static readonly string[] sr_ModelMenuOptions = new string[5] { "Truck", "Electric Motorcycle", "Regular Motorcycle", "Electric Car", "Regular Car" };
-        private static readonly string[] sr_StatusToFilterByMenuOptions = new string[4] { "InRepair", "Repaired", "Paid", "All" };
-        private static readonly string[] sr_VehicleStatusMenuOptions = new string[3] { "InRepair", "Repaired", "Paid" };
+        private static readonly string[] sr_FuelMenuOptions = Enum.GetNames(typeof(FuelEngine.eFuelType)).ToArray();
+        private static readonly string[] sr_VehicleTypesMenuOptions = Enum.GetNames(typeof(eVehicleType)).ToArray();
+        private static readonly string[] sr_VehicleStatusMenuOptions = Enum.GetNames(typeof(VehicleRecord.eVehicleStatus)).ToArray();
+        private static readonly string[] sr_StatusToFilterByMenuOptions = Enum.GetNames(typeof(VehicleRecord.eVehicleStatus)).Concat(new[] { "All" }).ToArray();
+
         public const string k_AddNewVehicleHeadline = "ADD NEW VEHICLE";
         public const string k_ShowVehiclesFilteredByHeadline = "SHOW ALL VEHICLES FILTERED BY GARAGE STATUS";
         public const string k_ChangeVehicleStatusHeadline = "CHANGE VEHICLE STATUS";
@@ -28,14 +27,19 @@ namespace Ex03.ConsoleUI
         public const string k_ShowVehiclesFilteredByMsg = "Please select status to filter all vehicles by:";
         public const string k_PressEnterToGoBackToMainMenuMsg = "Press 'Enter' to navigate back to the main menu.";
         public const string k_FuelEngineSuccessfullyMsg = "Vehicle has been fueled successfully";
-        public const string k_ChargeEngineSuccessfullyMsg = "Charged vehicle's battery successfully";
-        public const string k_WheelsInflatedSuccessfullyMsg = "Wheels inflated successfully to maximum PSI";
+        public const string k_ChargeEngineSuccessfullyMsg = "Recharged vehicle's successfully";
+        public const string k_WheelsInflatedSuccessfullyMsg = "Wheels inflated successfully to maximum recommended PSI";
         public const string k_VehicleNotFoundByLicensePlateMsg = "Couldn't find vehicle by the license plate you provided";
-        public const string k_VehicleStatusChangedSuccessfullyMsg = "Vehicle status have been changed successfully";
-        public const string k_ModelMenuDescription = "Please choose one of the following model's :";
-        public const string k_MainMenuDescription = "Main Menu :";
-        public const string k_ChargeBatteryDescription = "Please enter for how long would you like to charge the battery :";
-        public const string k_FuelEngineDescription = "Please enter how many liters would you like to fuel the vehicle :";
+        public const string k_VehicleStatusChangedSuccessfullyMsg = "Vehicle status has been changed successfully";
+        public const string k_ModelMenuDescription = "Please choose one of the following vehicle types:";
+        public const string k_MainMenuDescription = "Main Menu:";
+        public const string k_ChargeBatteryDescription = "Please enter for how long would you like to charge the battery:";
+        public const string k_FuelEngineDescription = "Please enter how many liters would you like to fuel the vehicle:";
+        public const string k_AskForOwnerNameMsg = "Please provide the owner's name and press 'Enter':";
+        public const string k_AskForOwnerPhoneNumberMsg = "Please provide the owner's phone number and press 'Enter':";
+        public const string k_AskForModelNameMsg = "Please provide the model name and press 'Enter':";
+        public const string k_AskForWheelManufacturerMsg = "Please provide the manufacturer name of the wheels and press 'Enter':";
+        public const string k_AskForCurrentAirPressureMsg = "Please provide the current PSI of the wheels and press 'Enter':";
 
         public static string[] MainMenuOption
         {
@@ -49,7 +53,7 @@ namespace Ex03.ConsoleUI
 
         public static string[] ModelMenuOptions
         {
-            get { return sr_ModelMenuOptions; }
+            get { return sr_VehicleTypesMenuOptions; }
         }
 
         public static string[] StatusToFilterByMenuOptions

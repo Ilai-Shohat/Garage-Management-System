@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Text;
+
+namespace Ex03.GarageLogic
 {
     public class VehicleRecord
     {
@@ -42,19 +44,14 @@
 
         public override string ToString()
         {
+            StringBuilder vehicleRecordDetails = new StringBuilder();
+            vehicleRecordDetails.Append("================ Vehicle Record Details ================\n");
+            vehicleRecordDetails.AppendFormat("Owner Name: {0}\n", r_OwnerName);
+            vehicleRecordDetails.AppendFormat("Phone Number: {0}\n", r_PhoneNumber);
+            vehicleRecordDetails.AppendFormat("Vehicle Status: {0}\n", m_VehicleStatus.ToString());
 
-            string details = string.Format(
-                "Vehicle Record\n" +
-                "Owner Name: {0}\n" +
-                "Phone Number: {1}\n" +
-                "Vehicle Status: {2}",
-                r_OwnerName,
-                r_PhoneNumber,
-                m_VehicleStatus);
-
-            return details;
+            return vehicleRecordDetails.ToString();
         }
-
         public enum eVehicleStatus
         {
             InRepair = 1,
@@ -62,4 +59,5 @@
             PaidFor = 3,
         }
     }
+    
 }
