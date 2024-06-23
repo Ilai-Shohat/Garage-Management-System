@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
             Vehicle vehicleToBeAdded = VehicleGenerator.CreateVehicle(i_VehicleType, i_ModelName, i_LicensePlate, i_WheelManufacturer, i_CurrentAirPressure);
             VehicleEntry vehicleEntry = new VehicleEntry(vehicleToBeAdded, i_VehicleRecord);
 
-            r_VehiclesInGarage[i_LicensePlate] = vehicleEntry;
+            r_VehiclesInGarage.Add(i_LicensePlate, vehicleEntry);
         }
 
         public Dictionary<string, VehicleEntry> GetVehiclesByStatus(VehicleRecord.eVehicleStatus i_VehicleStatus)
@@ -77,7 +77,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Cannot fuel an Electric engine with gasoline");
+                throw new ArgumentException("Cannot fuel an Electric engine");
             }
         }
 
@@ -90,7 +90,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Cannot charge a gasoline vehicle");
+                throw new ArgumentException("Cannot charge a fuel vehicle");
             }
         }
 

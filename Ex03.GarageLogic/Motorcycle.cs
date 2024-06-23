@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
         {
             if (!int.TryParse(i_EngineVolume, out int engineVolume))
             {
-                throw new FormatException("Invalid type for engine volume");
+                throw new FormatException("Invalid type for engine volume provided");
             }
 
             if (engineVolume <= 0)
@@ -77,7 +77,7 @@ namespace Ex03.GarageLogic
             {
                 { "motorcycle license type", Enum.GetNames(typeof(eMotorcycleLicenseType)).ToArray() },
                 { "engine volume", null },
-                {base.Engine is FuelEngine ? "Current Fuel Amount" : "battery remaining Operation Time", null}
+                { base.Engine is FuelEngine ? "Current Fuel Amount" : "battery remaining Operation Time", null}
             };
 
             return carProperties;

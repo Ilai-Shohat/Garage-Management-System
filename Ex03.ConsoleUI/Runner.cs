@@ -79,6 +79,7 @@ namespace Ex03.ConsoleUI
                         string vehicleModelName = ConsoleRenderer.RenderRequestForANonEmptyString(MenuOptions.k_AskForModelNameMsg);
                         string wheelManufacturer = ConsoleRenderer.RenderRequestForANonEmptyString(MenuOptions.k_AskForWheelManufacturerMsg);
                         string currentAirPressure = ConsoleRenderer.RenderRequestForANonEmptyString(MenuOptions.k_AskForCurrentAirPressureMsg);
+
                         s_GarageManager.AddVehicleToGarage(vehicleRecord, vehicleType, vehicleModelName, userInputLicensePlate, wheelManufacturer, currentAirPressure);
                         break;
                     }
@@ -138,6 +139,7 @@ namespace Ex03.ConsoleUI
         private static VehicleRecord generateVehicleRecord()
         {
             ConsoleRenderer.RenderHeadline(MenuOptions.k_OwnerCreationHeadline);
+
             string ownerName = ConsoleRenderer.RenderRequestForANonEmptyString(MenuOptions.k_AskForOwnerNameMsg);
             string ownerPhoneNumber = ConsoleRenderer.RenderRequestForANonEmptyString(MenuOptions.k_AskForOwnerPhoneNumberMsg);
             VehicleRecord garageCard = new VehicleRecord(ownerName, ownerPhoneNumber);
@@ -205,8 +207,10 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         FuelEngine.eFuelType fuelTypeFromUser = getFuelTypeFromUser();
+
                         ConsoleRenderer.RenderMessage(MenuOptions.k_FuelEngineDescription);
                         string amountToFillFromUser = Validator.InputValidatorGeneric<float>((i_MaxValue, i_UserInput) => Validator.IsNumberTypeAndInRange(i_MaxValue, i_UserInput, float.TryParse), float.MaxValue);
+
                         s_GarageManager.RefuelVehicleEngine(licensePlateFromUserString, amountToFillFromUser, fuelTypeFromUser);
                         ConsoleRenderer.RenderMessageAndWaitForUserEnterAnyKey(string.Format("{0} ,{1}", MenuOptions.k_FuelEngineSuccessfullyMsg, MenuOptions.k_PressEnterToGoBackToMainMenuMsg));
                     }

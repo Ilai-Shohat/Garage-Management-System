@@ -16,16 +16,14 @@ namespace Ex03.GarageLogic
         {
             if (string.IsNullOrEmpty(i_ModelName))
             {
-                throw new ArgumentException("Empty model name");
+                throw new ArgumentException("Empty model name provided");
+            }
+            if (string.IsNullOrEmpty(i_LicensePlate))
+            {
+                throw new ArgumentException("Empty license plate provided");
             }
 
             r_ModelName = i_ModelName;
-
-            if (string.IsNullOrEmpty(i_LicensePlate))
-            {
-                throw new ArgumentException("Empty license plate");
-            }
-
             r_LicensePlate = i_LicensePlate;
             r_Wheels = i_Wheels;
             r_Engine = i_Engine;
@@ -86,6 +84,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             StringBuilder vehicleDetailsBuilder = new StringBuilder();
+
             vehicleDetailsBuilder.Append("================ Vehicle Details ================\n");
             vehicleDetailsBuilder.AppendFormat("Model Name: {0}\n", r_ModelName);
             vehicleDetailsBuilder.AppendFormat("License Plate: {0}\n", r_LicensePlate);
@@ -103,6 +102,6 @@ namespace Ex03.GarageLogic
             return vehicleDetailsBuilder.ToString();
         }
 
-        protected abstract void AppendUniqueProperties(StringBuilder sb);
+        protected abstract void AppendUniqueProperties(StringBuilder vehicleGeneralDetails);
     }
 }

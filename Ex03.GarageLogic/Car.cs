@@ -82,7 +82,7 @@ namespace Ex03.GarageLogic
             {
                 {"car's color", Enum.GetNames(typeof(eCarColor)).ToArray()},
                 {"car door amount", Enum.GetNames(typeof(eDoorAmount)).ToArray()},
-                {base.Engine is FuelEngine ? "Current Fuel Amount" : "Remaining Operation Time", null}
+                {base.Engine is FuelEngine ? "Current Fuel Amount" : "battery remaining Operation Time", null}
             };
 
             return carProperties;

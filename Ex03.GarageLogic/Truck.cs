@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
         {
             if (!float.TryParse(i_CargoTankVolume, out float cargoTankVolume))
             {
-                throw new FormatException("Invalid type for cargo tank volume");
+                throw new FormatException("Invalid value provided for cargo tank volume");
             }
 
             if(cargoTankVolume <= 0)
@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
         {
             if(i_IsContainsDangerousMaterials != "1" && i_IsContainsDangerousMaterials != "2")
             {
-                throw new ArgumentException("Invalid option for dangerous materials");
+                throw new ArgumentException("Invalid option for dangerous materials was chosen");
             }
 
             m_IsContainsDangerousMaterials = i_IsContainsDangerousMaterials == "1";

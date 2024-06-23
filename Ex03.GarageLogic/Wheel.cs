@@ -43,11 +43,12 @@ namespace Ex03.GarageLogic
                 return r_MaxAirPressureRecommended;
             }
         }
+
         public void Inflate(string i_PSIToAdd)
         {
             if(!float.TryParse(i_PSIToAdd, out float PSIToAdd))
             {
-                throw new FormatException("Invalid type for PSI to add");
+                throw new FormatException("Not a float, please provide a float with PSI to inflate");
             }
             else if (PSIToAdd > 0 && PSIToAdd +  m_CurrentAirPressure <= r_MaxAirPressureRecommended)
             {
@@ -69,7 +70,7 @@ namespace Ex03.GarageLogic
             string wheelDetails = string.Format(
                 "    Manufacturer Name: {0}\n" +
                 "    Current Air Pressure: {1} PSI\n" +
-                "    Max Air Pressure Recommended: {2} PSI",
+                "    Max Air Pressure Recommended by Manufacturer: {2} PSI",
                 r_ManufacturerName,
                 m_CurrentAirPressure,
                 r_MaxAirPressureRecommended);

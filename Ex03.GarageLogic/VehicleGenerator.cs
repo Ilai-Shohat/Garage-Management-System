@@ -41,6 +41,7 @@
         private static Engine GenerateEngine(eVehicleType i_VehicleType)
         {
             Engine newEngine;
+
             if(i_VehicleType == eVehicleType.ElectricMotorcycle || i_VehicleType == eVehicleType.ElectricCar)
             {
                 newEngine = new ElectricEngine(VehicleProperties.GetElectricEngineMaxBatteryLife()[i_VehicleType]);
@@ -57,8 +58,8 @@
         {
             int wheelsCount = VehicleProperties.GetWheelsCount()[i_VehicleType];
             float maxAirPressure = VehicleProperties.GetWheelsMaxAirPressure()[i_VehicleType];
-
             Wheel[] wheels = new Wheel[wheelsCount];
+
             for (int i = 0; i < wheelsCount; i++)
             {
                 wheels[i] = new Wheel(i_WheelManufacturer, i_CurrentAirPressure, maxAirPressure);
